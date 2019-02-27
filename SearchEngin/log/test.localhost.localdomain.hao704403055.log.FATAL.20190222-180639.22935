@@ -1,0 +1,4 @@
+Log file created at: 2019/02/22 18:06:39
+Running on machine: localhost.localdomain
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+F0222 18:06:39.327602 22935 test.cpp:26] hello fatal

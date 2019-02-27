@@ -1,0 +1,6 @@
+Log file created at: 2019/02/22 18:06:39
+Running on machine: localhost.localdomain
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+W0222 18:06:39.327006 22935 test.cpp:24] hello warning
+E0222 18:06:39.327347 22935 test.cpp:25] hello error
+F0222 18:06:39.327602 22935 test.cpp:26] hello fatal
