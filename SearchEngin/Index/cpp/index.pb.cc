@@ -178,15 +178,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::DocInfo, content_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::DocInfo, jump_url_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::DocInfo, show_url_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::DocInfo, title_tokend_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::DocInfo, content_tokend_),
-  5,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::DocInfo, title_token_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::DocInfo, content_token_),
+  4,
   0,
   1,
   2,
   3,
   ~0u,
-  4,
+  ~0u,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::Weight, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::Weight, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -208,7 +208,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::KwdInfo, key_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::KwdInfo, weight_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::KwdInfo, doc_list_),
   0,
   ~0u,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::doc_index_proto::Index, _has_bits_),
@@ -260,15 +260,15 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\013index.proto\022\017doc_index_proto\"\"\n\004Pair\022\r"
-      "\n\005begin\030\001 \002(\005\022\013\n\003end\030\002 \002(\005\"\271\001\n\007DocInfo\022\016"
+      "\n\005begin\030\001 \002(\005\022\013\n\003end\030\002 \002(\005\"\267\001\n\007DocInfo\022\016"
       "\n\006doc_id\030\001 \002(\004\022\r\n\005title\030\002 \002(\t\022\017\n\007content"
       "\030\003 \002(\t\022\020\n\010jump_url\030\004 \002(\t\022\020\n\010show_url\030\005 \002"
-      "(\t\022+\n\014title_tokend\030\006 \003(\0132\025.doc_index_pro"
-      "to.Pair\022-\n\016content_tokend\030\007 \002(\0132\025.doc_in"
-      "dex_proto.Pair\"g\n\006Weight\022\016\n\006doc_id\030\001 \002(\004"
-      "\022\016\n\006weight\030\002 \002(\005\022\023\n\013title_count\030\003 \002(\005\022\025\n"
-      "\rcontent_count\030\004 \002(\005\022\021\n\tfirst_pos\030\005 \002(\005\""
-      "\?\n\007KwdInfo\022\013\n\003key\030\001 \002(\t\022\'\n\006weight\030\002 \003(\0132"
+      "(\t\022*\n\013title_token\030\006 \003(\0132\025.doc_index_prot"
+      "o.Pair\022,\n\rcontent_token\030\007 \003(\0132\025.doc_inde"
+      "x_proto.Pair\"g\n\006Weight\022\016\n\006doc_id\030\001 \002(\004\022\016"
+      "\n\006weight\030\002 \002(\005\022\023\n\013title_count\030\003 \002(\005\022\025\n\rc"
+      "ontent_count\030\004 \002(\005\022\021\n\tfirst_pos\030\005 \002(\005\"A\n"
+      "\007KwdInfo\022\013\n\003key\030\001 \002(\t\022)\n\010doc_list\030\002 \003(\0132"
       "\027.doc_index_proto.Weight\"j\n\005Index\022/\n\rfor"
       "ward_index\030\001 \003(\0132\030.doc_index_proto.DocIn"
       "fo\0220\n\016inverted_index\030\002 \003(\0132\030.doc_index_p"
@@ -609,8 +609,6 @@ void Pair::InternalSwap(Pair* other) {
 // ===================================================================
 
 void DocInfo::InitAsDefaultInstance() {
-  ::doc_index_proto::_DocInfo_default_instance_._instance.get_mutable()->content_tokend_ = const_cast< ::doc_index_proto::Pair*>(
-      ::doc_index_proto::Pair::internal_default_instance());
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int DocInfo::kDocIdFieldNumber;
@@ -618,8 +616,8 @@ const int DocInfo::kTitleFieldNumber;
 const int DocInfo::kContentFieldNumber;
 const int DocInfo::kJumpUrlFieldNumber;
 const int DocInfo::kShowUrlFieldNumber;
-const int DocInfo::kTitleTokendFieldNumber;
-const int DocInfo::kContentTokendFieldNumber;
+const int DocInfo::kTitleTokenFieldNumber;
+const int DocInfo::kContentTokenFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 DocInfo::DocInfo()
@@ -635,7 +633,8 @@ DocInfo::DocInfo(const DocInfo& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
       _cached_size_(0),
-      title_tokend_(from.title_tokend_) {
+      title_token_(from.title_token_),
+      content_token_(from.content_token_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_title()) {
@@ -653,11 +652,6 @@ DocInfo::DocInfo(const DocInfo& from)
   if (from.has_show_url()) {
     show_url_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.show_url_);
   }
-  if (from.has_content_tokend()) {
-    content_tokend_ = new ::doc_index_proto::Pair(*from.content_tokend_);
-  } else {
-    content_tokend_ = NULL;
-  }
   doc_id_ = from.doc_id_;
   // @@protoc_insertion_point(copy_constructor:doc_index_proto.DocInfo)
 }
@@ -668,9 +662,7 @@ void DocInfo::SharedCtor() {
   content_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   jump_url_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   show_url_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&content_tokend_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&doc_id_) -
-      reinterpret_cast<char*>(&content_tokend_)) + sizeof(doc_id_));
+  doc_id_ = GOOGLE_ULONGLONG(0);
 }
 
 DocInfo::~DocInfo() {
@@ -683,7 +675,6 @@ void DocInfo::SharedDtor() {
   content_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   jump_url_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   show_url_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete content_tokend_;
 }
 
 void DocInfo::SetCachedSize(int size) const {
@@ -715,9 +706,10 @@ void DocInfo::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  title_tokend_.Clear();
+  title_token_.Clear();
+  content_token_.Clear();
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 31u) {
+  if (cached_has_bits & 15u) {
     if (cached_has_bits & 0x00000001u) {
       GOOGLE_DCHECK(!title_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
       (*title_.UnsafeRawStringPointer())->clear();
@@ -733,10 +725,6 @@ void DocInfo::Clear() {
     if (cached_has_bits & 0x00000008u) {
       GOOGLE_DCHECK(!show_url_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
       (*show_url_.UnsafeRawStringPointer())->clear();
-    }
-    if (cached_has_bits & 0x00000010u) {
-      GOOGLE_DCHECK(content_tokend_ != NULL);
-      content_tokend_->Clear();
     }
   }
   doc_id_ = GOOGLE_ULONGLONG(0);
@@ -832,23 +820,22 @@ bool DocInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .doc_index_proto.Pair title_tokend = 6;
+      // repeated .doc_index_proto.Pair title_token = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_title_tokend()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_title_token()));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required .doc_index_proto.Pair content_tokend = 7;
+      // repeated .doc_index_proto.Pair content_token = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_content_tokend()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_content_token()));
         } else {
           goto handle_unusual;
         }
@@ -883,7 +870,7 @@ void DocInfo::SerializeWithCachedSizes(
 
   cached_has_bits = _has_bits_[0];
   // required uint64 doc_id = 1;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->doc_id(), output);
   }
 
@@ -927,17 +914,18 @@ void DocInfo::SerializeWithCachedSizes(
       5, this->show_url(), output);
   }
 
-  // repeated .doc_index_proto.Pair title_tokend = 6;
+  // repeated .doc_index_proto.Pair title_token = 6;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->title_tokend_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->title_token_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, this->title_tokend(static_cast<int>(i)), output);
+      6, this->title_token(static_cast<int>(i)), output);
   }
 
-  // required .doc_index_proto.Pair content_tokend = 7;
-  if (cached_has_bits & 0x00000010u) {
+  // repeated .doc_index_proto.Pair content_token = 7;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->content_token_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, *this->content_tokend_, output);
+      7, this->content_token(static_cast<int>(i)), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -956,7 +944,7 @@ void DocInfo::SerializeWithCachedSizes(
 
   cached_has_bits = _has_bits_[0];
   // required uint64 doc_id = 1;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->doc_id(), target);
   }
 
@@ -1004,19 +992,20 @@ void DocInfo::SerializeWithCachedSizes(
         5, this->show_url(), target);
   }
 
-  // repeated .doc_index_proto.Pair title_tokend = 6;
+  // repeated .doc_index_proto.Pair title_token = 6;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->title_tokend_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->title_token_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        6, this->title_tokend(static_cast<int>(i)), deterministic, target);
+        6, this->title_token(static_cast<int>(i)), deterministic, target);
   }
 
-  // required .doc_index_proto.Pair content_tokend = 7;
-  if (cached_has_bits & 0x00000010u) {
+  // repeated .doc_index_proto.Pair content_token = 7;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->content_token_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        7, *this->content_tokend_, deterministic, target);
+        7, this->content_token(static_cast<int>(i)), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1059,13 +1048,6 @@ size_t DocInfo::RequiredFieldsByteSizeFallback() const {
         this->show_url());
   }
 
-  if (has_content_tokend()) {
-    // required .doc_index_proto.Pair content_tokend = 7;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->content_tokend_);
-  }
-
   if (has_doc_id()) {
     // required uint64 doc_id = 1;
     total_size += 1 +
@@ -1084,7 +1066,7 @@ size_t DocInfo::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x0000003f) ^ 0x0000003f) == 0) {  // All required fields are present.
+  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
     // required string title = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -1105,11 +1087,6 @@ size_t DocInfo::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->show_url());
 
-    // required .doc_index_proto.Pair content_tokend = 7;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->content_tokend_);
-
     // required uint64 doc_id = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
@@ -1118,14 +1095,25 @@ size_t DocInfo::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  // repeated .doc_index_proto.Pair title_tokend = 6;
+  // repeated .doc_index_proto.Pair title_token = 6;
   {
-    unsigned int count = static_cast<unsigned int>(this->title_tokend_size());
+    unsigned int count = static_cast<unsigned int>(this->title_token_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->title_tokend(static_cast<int>(i)));
+          this->title_token(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .doc_index_proto.Pair content_token = 7;
+  {
+    unsigned int count = static_cast<unsigned int>(this->content_token_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->content_token(static_cast<int>(i)));
     }
   }
 
@@ -1158,9 +1146,10 @@ void DocInfo::MergeFrom(const DocInfo& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  title_tokend_.MergeFrom(from.title_tokend_);
+  title_token_.MergeFrom(from.title_token_);
+  content_token_.MergeFrom(from.content_token_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 63u) {
+  if (cached_has_bits & 31u) {
     if (cached_has_bits & 0x00000001u) {
       set_has_title();
       title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
@@ -1178,9 +1167,6 @@ void DocInfo::MergeFrom(const DocInfo& from) {
       show_url_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.show_url_);
     }
     if (cached_has_bits & 0x00000010u) {
-      mutable_content_tokend()->::doc_index_proto::Pair::MergeFrom(from.content_tokend());
-    }
-    if (cached_has_bits & 0x00000020u) {
       doc_id_ = from.doc_id_;
     }
     _has_bits_[0] |= cached_has_bits;
@@ -1202,11 +1188,9 @@ void DocInfo::CopyFrom(const DocInfo& from) {
 }
 
 bool DocInfo::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->title_tokend())) return false;
-  if (has_content_tokend()) {
-    if (!this->content_tokend_->IsInitialized()) return false;
-  }
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->title_token())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->content_token())) return false;
   return true;
 }
 
@@ -1216,12 +1200,12 @@ void DocInfo::Swap(DocInfo* other) {
 }
 void DocInfo::InternalSwap(DocInfo* other) {
   using std::swap;
-  title_tokend_.InternalSwap(&other->title_tokend_);
+  title_token_.InternalSwap(&other->title_token_);
+  content_token_.InternalSwap(&other->content_token_);
   title_.Swap(&other->title_);
   content_.Swap(&other->content_);
   jump_url_.Swap(&other->jump_url_);
   show_url_.Swap(&other->show_url_);
-  swap(content_tokend_, other->content_tokend_);
   swap(doc_id_, other->doc_id_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -1676,7 +1660,7 @@ void KwdInfo::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int KwdInfo::kKeyFieldNumber;
-const int KwdInfo::kWeightFieldNumber;
+const int KwdInfo::kDocListFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 KwdInfo::KwdInfo()
@@ -1692,7 +1676,7 @@ KwdInfo::KwdInfo(const KwdInfo& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
       _cached_size_(0),
-      weight_(from.weight_) {
+      doc_list_(from.doc_list_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   key_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_key()) {
@@ -1744,7 +1728,7 @@ void KwdInfo::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  weight_.Clear();
+  doc_list_.Clear();
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     GOOGLE_DCHECK(!key_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
@@ -1780,11 +1764,11 @@ bool KwdInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .doc_index_proto.Weight weight = 2;
+      // repeated .doc_index_proto.Weight doc_list = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_weight()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_doc_list()));
         } else {
           goto handle_unusual;
         }
@@ -1828,11 +1812,11 @@ void KwdInfo::SerializeWithCachedSizes(
       1, this->key(), output);
   }
 
-  // repeated .doc_index_proto.Weight weight = 2;
+  // repeated .doc_index_proto.Weight doc_list = 2;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->weight_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->doc_list_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->weight(static_cast<int>(i)), output);
+      2, this->doc_list(static_cast<int>(i)), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1861,12 +1845,12 @@ void KwdInfo::SerializeWithCachedSizes(
         1, this->key(), target);
   }
 
-  // repeated .doc_index_proto.Weight weight = 2;
+  // repeated .doc_index_proto.Weight doc_list = 2;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->weight_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->doc_list_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->weight(static_cast<int>(i)), deterministic, target);
+        2, this->doc_list(static_cast<int>(i)), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1892,14 +1876,14 @@ size_t KwdInfo::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->key());
   }
-  // repeated .doc_index_proto.Weight weight = 2;
+  // repeated .doc_index_proto.Weight doc_list = 2;
   {
-    unsigned int count = static_cast<unsigned int>(this->weight_size());
+    unsigned int count = static_cast<unsigned int>(this->doc_list_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->weight(static_cast<int>(i)));
+          this->doc_list(static_cast<int>(i)));
     }
   }
 
@@ -1932,7 +1916,7 @@ void KwdInfo::MergeFrom(const KwdInfo& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  weight_.MergeFrom(from.weight_);
+  doc_list_.MergeFrom(from.doc_list_);
   if (from.has_key()) {
     set_has_key();
     key_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.key_);
@@ -1955,7 +1939,7 @@ void KwdInfo::CopyFrom(const KwdInfo& from) {
 
 bool KwdInfo::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->weight())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->doc_list())) return false;
   return true;
 }
 
@@ -1965,7 +1949,7 @@ void KwdInfo::Swap(KwdInfo* other) {
 }
 void KwdInfo::InternalSwap(KwdInfo* other) {
   using std::swap;
-  weight_.InternalSwap(&other->weight_);
+  doc_list_.InternalSwap(&other->doc_list_);
   key_.Swap(&other->key_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);

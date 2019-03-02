@@ -12,8 +12,9 @@ message Pair
 //正排索引
 message DocInfo
 {
-    //数组下标
+    //数组下标（文档id）
     required uint64 doc_id = 1;
+
     //文档内容
     required string title = 2;
     required string content = 3;
@@ -21,11 +22,11 @@ message DocInfo
     required string jump_url = 4;
     required string show_url = 5;
     //分词结果
-    repeated Pair title_tokend = 6;
-    required Pair content_tokend = 7;
+    repeated Pair title_token = 6;
+    repeated Pair content_token = 7;
 };
 
-//关键词在文档中的权重信息
+//文档id列表
 message Weight
 {
     //文档id
@@ -44,8 +45,8 @@ message KwdInfo
 {
     //关键词
     required string key = 1;
-    //关键词在文档中的权重信息
-    repeated Weight weight = 2;
+    //文档id列表
+    repeated Weight doc_list = 2;
 };
 
 //类似于C++中的类class

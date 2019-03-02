@@ -293,17 +293,29 @@ class DocInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // accessors -------------------------------------------------------
 
-  // repeated .doc_index_proto.Pair title_tokend = 6;
-  int title_tokend_size() const;
-  void clear_title_tokend();
-  static const int kTitleTokendFieldNumber = 6;
-  const ::doc_index_proto::Pair& title_tokend(int index) const;
-  ::doc_index_proto::Pair* mutable_title_tokend(int index);
-  ::doc_index_proto::Pair* add_title_tokend();
+  // repeated .doc_index_proto.Pair title_token = 6;
+  int title_token_size() const;
+  void clear_title_token();
+  static const int kTitleTokenFieldNumber = 6;
+  const ::doc_index_proto::Pair& title_token(int index) const;
+  ::doc_index_proto::Pair* mutable_title_token(int index);
+  ::doc_index_proto::Pair* add_title_token();
   ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair >*
-      mutable_title_tokend();
+      mutable_title_token();
   const ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair >&
-      title_tokend() const;
+      title_token() const;
+
+  // repeated .doc_index_proto.Pair content_token = 7;
+  int content_token_size() const;
+  void clear_content_token();
+  static const int kContentTokenFieldNumber = 7;
+  const ::doc_index_proto::Pair& content_token(int index) const;
+  ::doc_index_proto::Pair* mutable_content_token(int index);
+  ::doc_index_proto::Pair* add_content_token();
+  ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair >*
+      mutable_content_token();
+  const ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair >&
+      content_token() const;
 
   // required string title = 2;
   bool has_title() const;
@@ -365,15 +377,6 @@ class DocInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::std::string* release_show_url();
   void set_allocated_show_url(::std::string* show_url);
 
-  // required .doc_index_proto.Pair content_tokend = 7;
-  bool has_content_tokend() const;
-  void clear_content_tokend();
-  static const int kContentTokendFieldNumber = 7;
-  const ::doc_index_proto::Pair& content_tokend() const;
-  ::doc_index_proto::Pair* release_content_tokend();
-  ::doc_index_proto::Pair* mutable_content_tokend();
-  void set_allocated_content_tokend(::doc_index_proto::Pair* content_tokend);
-
   // required uint64 doc_id = 1;
   bool has_doc_id() const;
   void clear_doc_id();
@@ -393,8 +396,6 @@ class DocInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   void clear_has_jump_url();
   void set_has_show_url();
   void clear_has_show_url();
-  void set_has_content_tokend();
-  void clear_has_content_tokend();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -402,12 +403,12 @@ class DocInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair > title_tokend_;
+  ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair > title_token_;
+  ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair > content_token_;
   ::google::protobuf::internal::ArenaStringPtr title_;
   ::google::protobuf::internal::ArenaStringPtr content_;
   ::google::protobuf::internal::ArenaStringPtr jump_url_;
   ::google::protobuf::internal::ArenaStringPtr show_url_;
-  ::doc_index_proto::Pair* content_tokend_;
   ::google::protobuf::uint64 doc_id_;
   friend struct ::protobuf_index_2eproto::TableStruct;
   friend void ::protobuf_index_2eproto::InitDefaultsDocInfoImpl();
@@ -656,17 +657,17 @@ class KwdInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // accessors -------------------------------------------------------
 
-  // repeated .doc_index_proto.Weight weight = 2;
-  int weight_size() const;
-  void clear_weight();
-  static const int kWeightFieldNumber = 2;
-  const ::doc_index_proto::Weight& weight(int index) const;
-  ::doc_index_proto::Weight* mutable_weight(int index);
-  ::doc_index_proto::Weight* add_weight();
+  // repeated .doc_index_proto.Weight doc_list = 2;
+  int doc_list_size() const;
+  void clear_doc_list();
+  static const int kDocListFieldNumber = 2;
+  const ::doc_index_proto::Weight& doc_list(int index) const;
+  ::doc_index_proto::Weight* mutable_doc_list(int index);
+  ::doc_index_proto::Weight* add_doc_list();
   ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Weight >*
-      mutable_weight();
+      mutable_doc_list();
   const ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Weight >&
-      weight() const;
+      doc_list() const;
 
   // required string key = 1;
   bool has_key() const;
@@ -691,7 +692,7 @@ class KwdInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Weight > weight_;
+  ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Weight > doc_list_;
   ::google::protobuf::internal::ArenaStringPtr key_;
   friend struct ::protobuf_index_2eproto::TableStruct;
   friend void ::protobuf_index_2eproto::InitDefaultsKwdInfoImpl();
@@ -887,13 +888,13 @@ inline void Pair::set_end(::google::protobuf::int32 value) {
 
 // required uint64 doc_id = 1;
 inline bool DocInfo::has_doc_id() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void DocInfo::set_has_doc_id() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void DocInfo::clear_has_doc_id() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void DocInfo::clear_doc_id() {
   doc_id_ = GOOGLE_ULONGLONG(0);
@@ -1161,88 +1162,64 @@ inline void DocInfo::set_allocated_show_url(::std::string* show_url) {
   // @@protoc_insertion_point(field_set_allocated:doc_index_proto.DocInfo.show_url)
 }
 
-// repeated .doc_index_proto.Pair title_tokend = 6;
-inline int DocInfo::title_tokend_size() const {
-  return title_tokend_.size();
+// repeated .doc_index_proto.Pair title_token = 6;
+inline int DocInfo::title_token_size() const {
+  return title_token_.size();
 }
-inline void DocInfo::clear_title_tokend() {
-  title_tokend_.Clear();
+inline void DocInfo::clear_title_token() {
+  title_token_.Clear();
 }
-inline const ::doc_index_proto::Pair& DocInfo::title_tokend(int index) const {
-  // @@protoc_insertion_point(field_get:doc_index_proto.DocInfo.title_tokend)
-  return title_tokend_.Get(index);
+inline const ::doc_index_proto::Pair& DocInfo::title_token(int index) const {
+  // @@protoc_insertion_point(field_get:doc_index_proto.DocInfo.title_token)
+  return title_token_.Get(index);
 }
-inline ::doc_index_proto::Pair* DocInfo::mutable_title_tokend(int index) {
-  // @@protoc_insertion_point(field_mutable:doc_index_proto.DocInfo.title_tokend)
-  return title_tokend_.Mutable(index);
+inline ::doc_index_proto::Pair* DocInfo::mutable_title_token(int index) {
+  // @@protoc_insertion_point(field_mutable:doc_index_proto.DocInfo.title_token)
+  return title_token_.Mutable(index);
 }
-inline ::doc_index_proto::Pair* DocInfo::add_title_tokend() {
-  // @@protoc_insertion_point(field_add:doc_index_proto.DocInfo.title_tokend)
-  return title_tokend_.Add();
+inline ::doc_index_proto::Pair* DocInfo::add_title_token() {
+  // @@protoc_insertion_point(field_add:doc_index_proto.DocInfo.title_token)
+  return title_token_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair >*
-DocInfo::mutable_title_tokend() {
-  // @@protoc_insertion_point(field_mutable_list:doc_index_proto.DocInfo.title_tokend)
-  return &title_tokend_;
+DocInfo::mutable_title_token() {
+  // @@protoc_insertion_point(field_mutable_list:doc_index_proto.DocInfo.title_token)
+  return &title_token_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair >&
-DocInfo::title_tokend() const {
-  // @@protoc_insertion_point(field_list:doc_index_proto.DocInfo.title_tokend)
-  return title_tokend_;
+DocInfo::title_token() const {
+  // @@protoc_insertion_point(field_list:doc_index_proto.DocInfo.title_token)
+  return title_token_;
 }
 
-// required .doc_index_proto.Pair content_tokend = 7;
-inline bool DocInfo::has_content_tokend() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+// repeated .doc_index_proto.Pair content_token = 7;
+inline int DocInfo::content_token_size() const {
+  return content_token_.size();
 }
-inline void DocInfo::set_has_content_tokend() {
-  _has_bits_[0] |= 0x00000010u;
+inline void DocInfo::clear_content_token() {
+  content_token_.Clear();
 }
-inline void DocInfo::clear_has_content_tokend() {
-  _has_bits_[0] &= ~0x00000010u;
+inline const ::doc_index_proto::Pair& DocInfo::content_token(int index) const {
+  // @@protoc_insertion_point(field_get:doc_index_proto.DocInfo.content_token)
+  return content_token_.Get(index);
 }
-inline void DocInfo::clear_content_tokend() {
-  if (content_tokend_ != NULL) content_tokend_->Clear();
-  clear_has_content_tokend();
+inline ::doc_index_proto::Pair* DocInfo::mutable_content_token(int index) {
+  // @@protoc_insertion_point(field_mutable:doc_index_proto.DocInfo.content_token)
+  return content_token_.Mutable(index);
 }
-inline const ::doc_index_proto::Pair& DocInfo::content_tokend() const {
-  const ::doc_index_proto::Pair* p = content_tokend_;
-  // @@protoc_insertion_point(field_get:doc_index_proto.DocInfo.content_tokend)
-  return p != NULL ? *p : *reinterpret_cast<const ::doc_index_proto::Pair*>(
-      &::doc_index_proto::_Pair_default_instance_);
+inline ::doc_index_proto::Pair* DocInfo::add_content_token() {
+  // @@protoc_insertion_point(field_add:doc_index_proto.DocInfo.content_token)
+  return content_token_.Add();
 }
-inline ::doc_index_proto::Pair* DocInfo::release_content_tokend() {
-  // @@protoc_insertion_point(field_release:doc_index_proto.DocInfo.content_tokend)
-  clear_has_content_tokend();
-  ::doc_index_proto::Pair* temp = content_tokend_;
-  content_tokend_ = NULL;
-  return temp;
+inline ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair >*
+DocInfo::mutable_content_token() {
+  // @@protoc_insertion_point(field_mutable_list:doc_index_proto.DocInfo.content_token)
+  return &content_token_;
 }
-inline ::doc_index_proto::Pair* DocInfo::mutable_content_tokend() {
-  set_has_content_tokend();
-  if (content_tokend_ == NULL) {
-    content_tokend_ = new ::doc_index_proto::Pair;
-  }
-  // @@protoc_insertion_point(field_mutable:doc_index_proto.DocInfo.content_tokend)
-  return content_tokend_;
-}
-inline void DocInfo::set_allocated_content_tokend(::doc_index_proto::Pair* content_tokend) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete content_tokend_;
-  }
-  if (content_tokend) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      content_tokend = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, content_tokend, submessage_arena);
-    }
-    set_has_content_tokend();
-  } else {
-    clear_has_content_tokend();
-  }
-  content_tokend_ = content_tokend;
-  // @@protoc_insertion_point(field_set_allocated:doc_index_proto.DocInfo.content_tokend)
+inline const ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Pair >&
+DocInfo::content_token() const {
+  // @@protoc_insertion_point(field_list:doc_index_proto.DocInfo.content_token)
+  return content_token_;
 }
 
 // -------------------------------------------------------------------
@@ -1436,34 +1413,34 @@ inline void KwdInfo::set_allocated_key(::std::string* key) {
   // @@protoc_insertion_point(field_set_allocated:doc_index_proto.KwdInfo.key)
 }
 
-// repeated .doc_index_proto.Weight weight = 2;
-inline int KwdInfo::weight_size() const {
-  return weight_.size();
+// repeated .doc_index_proto.Weight doc_list = 2;
+inline int KwdInfo::doc_list_size() const {
+  return doc_list_.size();
 }
-inline void KwdInfo::clear_weight() {
-  weight_.Clear();
+inline void KwdInfo::clear_doc_list() {
+  doc_list_.Clear();
 }
-inline const ::doc_index_proto::Weight& KwdInfo::weight(int index) const {
-  // @@protoc_insertion_point(field_get:doc_index_proto.KwdInfo.weight)
-  return weight_.Get(index);
+inline const ::doc_index_proto::Weight& KwdInfo::doc_list(int index) const {
+  // @@protoc_insertion_point(field_get:doc_index_proto.KwdInfo.doc_list)
+  return doc_list_.Get(index);
 }
-inline ::doc_index_proto::Weight* KwdInfo::mutable_weight(int index) {
-  // @@protoc_insertion_point(field_mutable:doc_index_proto.KwdInfo.weight)
-  return weight_.Mutable(index);
+inline ::doc_index_proto::Weight* KwdInfo::mutable_doc_list(int index) {
+  // @@protoc_insertion_point(field_mutable:doc_index_proto.KwdInfo.doc_list)
+  return doc_list_.Mutable(index);
 }
-inline ::doc_index_proto::Weight* KwdInfo::add_weight() {
-  // @@protoc_insertion_point(field_add:doc_index_proto.KwdInfo.weight)
-  return weight_.Add();
+inline ::doc_index_proto::Weight* KwdInfo::add_doc_list() {
+  // @@protoc_insertion_point(field_add:doc_index_proto.KwdInfo.doc_list)
+  return doc_list_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Weight >*
-KwdInfo::mutable_weight() {
-  // @@protoc_insertion_point(field_mutable_list:doc_index_proto.KwdInfo.weight)
-  return &weight_;
+KwdInfo::mutable_doc_list() {
+  // @@protoc_insertion_point(field_mutable_list:doc_index_proto.KwdInfo.doc_list)
+  return &doc_list_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::doc_index_proto::Weight >&
-KwdInfo::weight() const {
-  // @@protoc_insertion_point(field_list:doc_index_proto.KwdInfo.weight)
-  return weight_;
+KwdInfo::doc_list() const {
+  // @@protoc_insertion_point(field_list:doc_index_proto.KwdInfo.doc_list)
+  return doc_list_;
 }
 
 // -------------------------------------------------------------------
